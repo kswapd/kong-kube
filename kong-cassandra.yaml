@@ -2,63 +2,57 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kong-admin-pgl
+  name: kong-admin-cas
 spec:
   type: LoadBalancer
   loadBalancerSourceRanges:
   - 0.0.0.0/0
   ports:
-  - name: kong-admin-pgl
+  - name: kong-admin-cas
     port: 8001
     targetPort: 8001
     protocol: TCP
-  - name: kong-proxy-pgl
+  - name: kong-proxy-cas
     port: 8000
     targetPort: 8000
     protocol: TCP
   selector:
-    app: kong-pgl
+    app: kong-cas
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kong-rc-pgl
+  name: kong-rc-cas
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
-        name: kong-rc-pgl
-        app: kong-pgl
+        name: kong-rc-cas
+        app: kong-cas
     spec:
       containers:
-      - name: kong-pgl
+      - name: kong-cas
         image: kong
         env:
           - name: KONG_DATABASE
-            value: postgres
-          - name: KONG_PG_USER
-            value: kong
-          - name: KONG_PG_DATABASE
-            value: kong
-          - name: KONG_PG_PASSWORD
-            value: kong
-          - name: KONG_PG_HOST
-            value: 192.168.3.49
+            value: cassandra
+          - name: KONG_CASSANDRA_CONTACT_POINTS 
+            value: 192.168.3.2
         ports:
-        - name: admin-pgl
+        - name: admin-cas
           containerPort: 8001
           protocol: TCP
-        - name: proxy-pgl
+        - name: proxy-cas
           containerPort: 8000
           protocol: TCP
-        - name: proxy-ssl-pgl
+        - name: proxy-ssl-cas
           containerPort: 8443
           protocol: TCP
-        - name: surf-tcp-pgl
+        - name: surf-tcp-cas
           containerPort: 7946
           protocol: TCP
-        - name: surf-udp-pgl
+        - name: surf-udp-cas
           containerPort: 7946
           protocol: UDP

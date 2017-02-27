@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kong-pgl
+  name: pgl-k
 spec:
   ports:
   - name: pgql
@@ -9,21 +9,21 @@ spec:
     targetPort: 5432
     protocol: TCP
   selector:
-    app: kong-pgl
+    app: pgl-k
 ---
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: kong-pgl
+  name: pgl-k
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: kong-pgl
+        app: pgl-k
     spec:
       containers:
-        - name: postgres
+        - name: pgl-k
           image: postgres:9.4
           env:
             - name: POSTGRES_USER
