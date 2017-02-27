@@ -1,5 +1,5 @@
 # kong-kube
-kube deploy for kong
+kubernetes deployments yaml files for kong project.
 ## how to use:
 Create postgres service:
 ```
