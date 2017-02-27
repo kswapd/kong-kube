@@ -1,6 +1,7 @@
 # kong-kube
 kube deploy for kong
 ## how to use:
+Create postgres service:
 ```
     kubectl create -f postgres.yaml
 ```
@@ -10,6 +11,7 @@ kube deploy for kong
               value: Your_postgrescluster_ip
 ```
    
+Create kong service:
 ```
     kubectl create -f kong.yaml
 ```
