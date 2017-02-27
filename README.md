@@ -4,7 +4,7 @@ kubernetes deployments yaml files for kong project.
 ### Use postgresql as datastore:
 Create postgres service:
 ```
-    kubectl create -f postgres.yaml
+    kubectl create -f postgresql.yaml
 ```
    Edit kong-postgresql.yml, modify postgres ip to your postgres cluster  ip.
 ```
@@ -33,7 +33,7 @@ Create kong service:
 ```
 Finally, enjoy it.
 
-##Problem:
+##Tips:
 
 1. If use cassandra as kong datastore, kong node replicas number must be set to 1 in kong-cassandra.yaml, if not, cassandra may report error as belows:
 ``` 
