@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: kong-pgl
-        image: kong
+        image: kong:0.9
         env:
           - name: KONG_DATABASE
             value: postgres
@@ -45,7 +45,7 @@ spec:
           - name: KONG_PG_PASSWORD
             value: kong
           - name: KONG_PG_HOST
-            value: 192.168.3.88
+            value: 192.168.3.36
         ports:
         - name: admin-pgl
           containerPort: 8001
